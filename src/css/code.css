@@ -1,0 +1,8 @@
+.doc .console-input pre.highlight code {
+  background-color: antiquewhite;
+  padding-right: 38px;
+}
+
+.doc .console-output pre.highlight code {
+  background-color: #e0ffff;
+}

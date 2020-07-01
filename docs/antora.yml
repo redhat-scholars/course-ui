@@ -1,5 +1,5 @@
-name: antora-ui-default
-title: Antora Default UI
+name: redhat-scholars-ui
+title: RedHat Scholars UI
 version: master
 nav:
-- modules/ROOT/nav.adoc
+  - modules/ROOT/nav.adoc
