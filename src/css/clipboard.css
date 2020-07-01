@@ -1,0 +1,15 @@
+.copybtn {
+  border: 1px solid #d5d5d5;
+  font-weight: 600;
+  cursor: pointer !important;
+  outline: none;
+  background-color: #eee;
+  background-image: linear-gradient(#fcfcfc, #eee);
+}
+
+button.copybtn:hover {
+  text-decoration: none;
+  background-color: #ddd;
+  background-image: linear-gradient(#eee, #ddd);
+  border-color: #ccc;
+}
