@@ -1,6 +1,6 @@
 var ClipboardJS = require('clipboard/dist/clipboard')
 
-var snippets = document.querySelectorAll('.console-input pre');
+var snippets = document.querySelectorAll('.console-input pre, .execute pre, .copypaste pre');
 [].forEach.call(snippets, function (snippet) {
   var firstChild = snippet.querySelector('code')
   if (firstChild != null) {

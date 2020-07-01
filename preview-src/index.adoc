@@ -244,6 +244,18 @@ ____
 echo "hello world"
 ----
 
+[.console-input]
+[source,bash,role="execute"]
+----
+echo "Goodbye World!"
+----
+
+[.console-input]
+[source,bash,role="copypaste"]
+----
+echo "Copy and Paste!"
+----
+
 === Console output
 
 [.console-output]
