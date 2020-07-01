@@ -52,6 +52,7 @@
     "stylelint-config-standard": "~20.0",
     "through2": "~3.0",
     "vinyl-buffer": "~1.0",
-    "vinyl-fs": "~3.0"
+    "vinyl-fs": "~3.0",
+    "gulp-if": "^3.0.0"
   }
 }

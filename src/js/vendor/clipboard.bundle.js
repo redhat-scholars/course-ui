@@ -20,12 +20,12 @@ for (var i = 0; i < buttons.length; i++) {
   buttons[i].addEventListener('blur', clearTooltip)
 }
 
-function clearTooltip(e) {
+function clearTooltip (e) {
   e.currentTarget.setAttribute('class', 'copy-button')
   e.currentTarget.removeAttribute('aria-label')
 }
 
-function showTooltip(elem, msg) {
+function showTooltip (elem, msg) {
   elem.setAttribute('class', 'copy-button tooltipped tooltipped-s tooltipped-no-delay')
   elem.setAttribute('aria-label', msg)
 }
