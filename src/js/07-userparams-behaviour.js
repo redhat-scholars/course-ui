@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
-  var queryString = window.location.href
+  var queryString = window.location.search
 
   function getParameterByName (name, url) {
-    if (!url) url = queryString
+    if (!url) url = window.location.href
     name = name.replace(/[[\]]/g, '\\$&')
     var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)')
     var results = regex.exec(url)
