@@ -1,8 +1,17 @@
 document.addEventListener('DOMContentLoaded', function () {
-  var queryString = window.location.search
-  var urlParams = new URLSearchParams(queryString)
-  var username = urlParams.get('USER')
-  var password = urlParams.get('PASSWORD')
+  var queryString = window.location.href
+
+  function getParameterByName (name, url) {
+    if (!url) url = queryString
+    name = name.replace(/[[\]]/g, '\\$&')
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)')
+    var results = regex.exec(url)
+    if (!results) return null
+    if (!results[2]) return ''
+    var val = decodeURIComponent(results[2].replace(/\+/g, ' '))
+    console.log(name + '=' + val)
+    return val
+  }
 
   function walkText (node, pattern, value) {
     if (node.nodeType === 3) {
@@ -21,8 +30,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  walkText(document.body, '(%USER%|\\$USERNAME)', username)
-  walkText(document.body, '(%PASSWORD%|\\$PASSWORD)', password)
+  walkText(document.body, '(%USER%|\\$USERNAME)', getParameterByName('USER'))
+  walkText(document.body, '(%PASSWORD%|\\$PASSWORD)', getParameterByName('PASSWORD'))
 
   document.querySelectorAll('.userfied-link').forEach(function (el) {
     el.href += queryString

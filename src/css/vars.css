@@ -140,5 +140,5 @@
   --z-index-page-version-menu: 3;
   --z-index-navbar: 4;
   /* tabs */
-  --color-brand-black: #000000;
+  --color-brand-black: var(--color-black);
 }
