@@ -1,19 +1,24 @@
 document.addEventListener('DOMContentLoaded', function () {
   var queryString = window.location.search
 
-  function getParameterByName (name, url) {
+  /*
+   * Thanks to https://gomakethings.com/getting-all-query-string-values-from-a-url-with-vanilla-js/
+  */
+  function getParams (url) {
     if (!url) url = window.location.href
-    name = name.replace(/[[\]]/g, '\\$&')
-    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)')
-    var results = regex.exec(url)
-    if (!results) return null
-    if (!results[2]) return ''
-    var val = decodeURIComponent(results[2].replace(/\+/g, ' '))
-    console.log(name + '=' + val)
-    return val
+    var params = {}
+    var parser = document.createElement('a')
+    parser.href = url
+    var query = parser.search.substring(1)
+    var vars = query.split('&')
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=')
+      params[pair[0]] = decodeURIComponent(pair[1])
+    }
+    return params
   }
 
-  function walkText (node, pattern, value) {
+  function replaceParamsInNodes (node, pattern, value) {
     if (node.nodeType === 3) {
       var re = new RegExp(pattern, 'g')
       var text = node.data
@@ -25,13 +30,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     if (node.nodeType === 1 && node.nodeName !== 'SCRIPT') {
       for (var i = 0; i < node.childNodes.length; i++) {
-        walkText(node.childNodes[i], pattern, value)
+        replaceParamsInNodes(node.childNodes[i], pattern, value)
       }
     }
   }
 
-  walkText(document.body, '(%USER%|\\$USERNAME)', getParameterByName('USER'))
-  walkText(document.body, '(%PASSWORD%|\\$PASSWORD)', getParameterByName('PASSWORD'))
+  var allParams = getParams()
+  var keys = Object.keys(allParams)
+  for (var i = 0; i < keys.length; i++) {
+    replaceParamsInNodes(document.body, '(%' + keys[i].toUpperCase() + '%)', allParams[keys[i]])
+  }
 
   document.querySelectorAll('.userfied-link').forEach(function (el) {
     el.href += queryString

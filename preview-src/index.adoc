@@ -24,7 +24,7 @@ Hello %USER% your password is %PASSWORD%
 You need to https://console.openshift.com[login,role=userfied-link]
 
 
-Hello $USERNAME your password is $PASSWORD
+I like %COLOR% color
 
 == Cu solet
 
