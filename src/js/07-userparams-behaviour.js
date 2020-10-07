@@ -1,5 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
-  var queryString = window.location.search
+
+  function hasQueryString (url) {
+    // regex pattern for detecting querystring
+    var pattern = new RegExp(/\?.+=.*/g)
+    return pattern.test(url)
+  }
 
   /*
    * Thanks to https://gomakethings.com/getting-all-query-string-values-from-a-url-with-vanilla-js/
@@ -41,11 +46,22 @@ document.addEventListener('DOMContentLoaded', function () {
     replaceParamsInNodes(document.body, '(%' + keys[i].toUpperCase() + '%)', allParams[keys[i]])
   }
 
-  document.querySelectorAll('.userfied-link').forEach(function (el) {
-    el.href += queryString
-  })
+  //Handle links
+  var allQueryPramLinks = document.querySelectorAll('.query-params-link')
+  if (allQueryPramLinks) {
+    allQueryPramLinks.forEach(appendQueryStringToHref)
+  }
 
-  document.querySelectorAll('.nav-link').forEach(function (el) {
-    el.href += queryString
-  })
+  var allNavLinks = document.querySelectorAll('.nav-link')
+  if (allNavLinks) {
+    allNavLinks.forEach(appendQueryStringToHref)
+  }
+
+  function appendQueryStringToHref (el) {
+    var queryString = window.location.search
+    if (!hasQueryString(el.href) && queryString) {
+      // console.log('No Query String in  %s, adding.', el.href)
+      el.href += queryString
+    }
+  }
 })
