@@ -47,9 +47,15 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   //Handle links
-  document.querySelectorAll('.userfied-link').forEach(appendQueryStringToHref)
-  document.querySelectorAll('.nav-link').forEach(appendQueryStringToHref)
-  document.querySelectorAll('a').forEach(appendQueryStringToHref)
+  var allQueryPramLinks = document.querySelectorAll('.query-params-link')
+  if (allQueryPramLinks) {
+    allQueryPramLinks.forEach(appendQueryStringToHref)
+  }
+
+  var allNavLinks = document.querySelectorAll('.nav-link')
+  if (allNavLinks) {
+    allNavLinks.forEach(appendQueryStringToHref)
+  }
 
   function appendQueryStringToHref (el) {
     var queryString = window.location.search
