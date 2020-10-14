@@ -23,19 +23,21 @@ document.addEventListener('DOMContentLoaded', function () {
     return params
   }
 
-  function replaceParamsInNodes (node, pattern, value) {
-    var re = new RegExp(pattern, 'gi')
+  function replaceParamsInNodes (node, key, value) {
+    if (node.parentElement) {
+      //console.log('Parent element %s', node.parentElement.nodeName)
+      if (node.parentElement.nodeName === 'code' ||
+        node.parentElement.nodeName === 'CODE') {
+        return
+      }
+    }
     if (node.nodeType === 3) {
       var text = node.data
-      if (text.match(re)) {
-        if (value) {
-          node.data = text.replace(re, value)
-        }
-      }
+      node.data = applyPattern(text, key, value)
     }
     if (node.nodeType === 1 && node.nodeName !== 'SCRIPT') {
       for (var i = 0; i < node.childNodes.length; i++) {
-        replaceParamsInNodes(node.childNodes[i], pattern, value)
+        replaceParamsInNodes(node.childNodes[i], key, value)
       }
     }
   }
@@ -43,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var allParams = getParams()
   var keys = Object.keys(allParams)
   for (var i = 0; i < keys.length; i++) {
-    replaceParamsInNodes(document.body, '(%' + keys[i].toUpperCase() + '%)', allParams[keys[i]])
+    replaceParamsInNodes(document.body, keys[i], allParams[keys[i]])
   }
 
   //Handle links
@@ -68,16 +70,8 @@ document.addEventListener('DOMContentLoaded', function () {
       el.classList.contains('nav-link')
     if (!hasQueryString(el.href) && queryString) {
       var href = el.href
-      //console.log('Orginal href %s', href)
       for (var i = 0; i < keys.length; i++) {
-        //console.log('href %s', href)
-        //(%25key%25|%key%) %25 is urlencode value of %
-        var paramKeyPattern = '(' + '%25' + keys[i] + '%25' +
-          '|' + '%' + keys[i] + '%' + ')'
-        //console.log('Replacing %s', paramKeyPattern)
-        var re = new RegExp(paramKeyPattern, 'gi')
-        href = href.replace(re, allParams[keys[i]])
-        //console.log('after replace href %s', href)
+        href = applyPattern(href, keys[i], allParams[keys[i]])
       }
       if (appendQueryString) {
         el.href = href + queryString
@@ -86,5 +80,13 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
     }
+  }
+
+  function applyPattern (str, key, value) {
+    //(%25key%25|%key%) %25 is urlencode value of %
+    var pattern = '(' + '%25' + key + '%25' +
+      '|(?<!-)' + '%' + key + '%' + '(?!-))'
+    var re = new RegExp(pattern, 'gi')
+    return str.replace(re, value)
   }
 })
