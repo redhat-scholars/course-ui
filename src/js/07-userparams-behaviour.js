@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function replaceParamsInNodes (node, pattern, value) {
+    var re = new RegExp(pattern, 'gi')
     if (node.nodeType === 3) {
-      var re = new RegExp(pattern, 'g')
       var text = node.data
       if (text.match(re)) {
         if (value) {
@@ -52,6 +52,11 @@ document.addEventListener('DOMContentLoaded', function () {
     allQueryPramLinks.forEach(appendQueryStringToHref)
   }
 
+  var pramLinks = document.querySelectorAll('.params-link')
+  if (pramLinks) {
+    pramLinks.forEach(appendQueryStringToHref)
+  }
+
   var allNavLinks = document.querySelectorAll('.nav-link')
   if (allNavLinks) {
     allNavLinks.forEach(appendQueryStringToHref)
@@ -59,9 +64,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function appendQueryStringToHref (el) {
     var queryString = window.location.search
+    var appendQueryString = el.classList.contains('query-params-link') ||
+      el.classList.contains('nav-link')
     if (!hasQueryString(el.href) && queryString) {
-      // console.log('No Query String in  %s, adding.', el.href)
-      el.href += queryString
+      var href = el.href
+      //console.log('Orginal href %s', href)
+      for (var i = 0; i < keys.length; i++) {
+        //console.log('href %s', href)
+        //(%25key%25|%key%) %25 is urlencode value of %
+        var paramKeyPattern = '(' + '%25' + keys[i] + '%25' +
+          '|' + '%' + keys[i] + '%' + ')'
+        //console.log('Replacing %s', paramKeyPattern)
+        var re = new RegExp(paramKeyPattern, 'gi')
+        href = href.replace(re, allParams[keys[i]])
+        //console.log('after replace href %s', href)
+      }
+      if (appendQueryString) {
+        el.href = href + queryString
+      } else {
+        el.href = href
+      }
+
     }
   }
 })
