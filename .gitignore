@@ -3,3 +3,5 @@
 /public/
 yarn.lock
 .tool-versions
+
+.vscode/
