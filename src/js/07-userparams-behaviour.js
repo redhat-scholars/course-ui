@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (desiredQueryString.toString() && appendQueryString) {
       var hrefURL = new URL(el.href)
       for (var k of desiredQueryString.keys()) {
-        hrefURL.searchParams.append(k, desiredQueryString.get(k))
+        hrefURL.searchParams.set(k, desiredQueryString.get(k))
       }
 
       el.href = hrefURL.toString()
