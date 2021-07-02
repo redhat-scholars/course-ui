@@ -26,6 +26,11 @@ You need to https://console.openshift.com[login,role=userfied-link]
 
 I like %COLOR% color
 
+[#link-testing]
+== Link Testing
+
+Here is a link:index.html?USER=%USER%#liber-recusabo[link^] containing a query string item that should open to "Liber recusabo" in a new window
+
 == Cu solet
 
 Nominavi luptatum eos, an vim hinc philosophia intellegebat.

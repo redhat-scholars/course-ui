@@ -105,6 +105,9 @@ page:
       - content: Brand&#8217;s Hardware &amp; Software Requirements
         url: /xyz/5.2/index.html
         urlType: internal
+      - content: Link Testing
+        url: '/xyz/5.2/index.html#link-testing'
+        urlType: internal
       - content: Cu Solet
         url: '/xyz/5.2/index.html#cu-solet'
         urlType: internal
