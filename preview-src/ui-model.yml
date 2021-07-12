@@ -108,6 +108,9 @@ page:
       - content: Link Testing
         url: '/xyz/5.2/index.html#link-testing'
         urlType: internal
+      - content: Query String Replacement Testing
+        url: '/xyz/5.2/index.html#query-string-replacement-testing'
+        urlType: internal
       - content: Cu Solet
         url: '/xyz/5.2/index.html#cu-solet'
         urlType: internal

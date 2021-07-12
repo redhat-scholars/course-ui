@@ -5,6 +5,7 @@ Author Name
 :!example-caption:
 :!table-caption:
 :page-pagination:
+:USER: %USER%
 
 image:multirepo-ssg.svg[Multirepo SSG,200,float=right]
 Platonem complectitur mediocritatem ea eos.
@@ -30,6 +31,31 @@ I like %COLOR% color
 == Link Testing
 
 Here is a link:index.html?USER=%USER%#liber-recusabo[link^] containing a query string item that should open to "Liber recusabo" in a new window
+
+[#query-string-replacement-testing]
+== Query String Replacement Testing
+
+_If the `USER` query string has been set in the URL, then you should see it replaced (or not) below according to the text_
+
+[.console-output]
+[source,bash,subs="+macros,+attributes"]
+----
+This should show the USER substitution: {USER}
+----
+
+This should also show the USER substitution: `%USER%`
+
+[.no-query-replace]
+[.console-output]
+[source,bash,noquery,subs="+macros,+attributes"]
+----
+This should not: pass:[%USER%]
+----
+
+And this also should not: [.no-query-replace]`%USER%`
+
+You should see USER replacement here: %USER% but not here: [.no-query-replace]#%USER%#
+
 
 == Cu solet
 
