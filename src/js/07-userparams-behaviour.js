@@ -40,13 +40,11 @@ document.addEventListener('DOMContentLoaded', function () {
   // refreshing links
 
   function replaceParamsInNodes (node, key, value) {
-    if (node.parentElement) {
-      //console.log('Parent element %s', node.parentElement.nodeName)
-      if (node.parentElement.nodeName === 'code' ||
-        node.parentElement.nodeName === 'CODE') {
-        return
-      }
+    // Don't descend into any nodes that are children of the no-query-replace class
+    if ((typeof node.classList !== 'undefined') && (node.classList.contains('no-query-replace'))) {
+      return
     }
+
     if (node.nodeType === 3) {
       var text = node.data
       node.data = applyPattern(text, key, value)
