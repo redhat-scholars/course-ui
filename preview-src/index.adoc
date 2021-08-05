@@ -56,6 +56,9 @@ And this also should not: [.no-query-replace]`%USER%`
 
 You should see USER replacement here: %USER% but not here: [.no-query-replace]#%USER%#
 
+=== Xrefs
+
+xref:index.adoc#link-testing[This,role="page"] is an xref that needs the query string preserved.
 
 == Cu solet
 
