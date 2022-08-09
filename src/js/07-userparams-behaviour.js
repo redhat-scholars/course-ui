@@ -78,8 +78,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function applyPattern (str, key, value) {
     //(%25key%25|%key%) %25 is urlencode value of %
-    var pattern = '(' + '%25' + key + '%25' +
-      '|(?<!-)' + '%' + key + '%' + '(?!-))'
+    var pattern = '(' + '%25' + key + '%25' + '|' + '%' + key + '%' + ')'
+
+    // The following pattern was introduced in commit db18c1dca8e101d0f3a2e512c43ada19168e5afe,
+    // but it's not clear why the negative lookbehind was added. Keeping here
+    // in case we need a revert in the future
+    // var pattern = '(' + '%25' + key + '%25' +
+    //   '|(?<!-)' + '%' + key + '%' + '(?!-))'
+
     var re = new RegExp(pattern, 'gi')
     return str.replace(re, value)
   }
