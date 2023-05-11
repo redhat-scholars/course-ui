@@ -32,6 +32,10 @@ I like %COLOR% color
 
 Here is a link:index.html?USER=%USER%#liber-recusabo[link^] containing a query string item that should open to "Liber recusabo" in a new window
 
+This link (link:index.html?USER=username#link-testing[index.html?USER=username]) that will set the `USER` querystring parameter to `username` and return to this section.
+
+This link should substitute the `USER` queryparam into the URL itself: link:index-%USER%.html?USER=%USER%#link-testing[index-%USER%.html^]
+
 [#query-string-replacement-testing]
 == Query String Replacement Testing
 

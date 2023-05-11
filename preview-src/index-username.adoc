@@ -1,0 +1,1 @@
+This is an empty page used to help verify the parameter replacement in content containing leading hyphens, i.e `%NAME%` should be replaced in both `hello-%NAME%` and `hello %NAME%`.
