@@ -32,6 +32,7 @@
     "gulp-concat": "~2.6",
     "gulp-connect": "~5.7",
     "gulp-eslint": "~6.0",
+    "gulp-if": "^3.0.0",
     "gulp-imagemin": "~6.2",
     "gulp-postcss": "~8.0",
     "gulp-stylelint": "~11.0",
@@ -52,7 +53,6 @@
     "stylelint-config-standard": "~20.0",
     "through2": "~3.0",
     "vinyl-buffer": "~1.0",
-    "vinyl-fs": "~3.0",
-    "gulp-if": "^3.0.0"
+    "vinyl-fs": "~3.0"
   }
 }
